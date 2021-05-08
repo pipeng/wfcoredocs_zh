@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>saga事务 - Workflow Core 中文文档</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "saga\u4e8b\u52a1";
+    var mkdocs_page_input_path = "saga-transactions.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Workflow Core 中文文档</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">简介</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../getting-started/">入门指南</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../external-events/">外部事件</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../activity-workers/">活动工作者</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../error-handling/">错误处理</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../control-structures/">控制结构</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">saga事务</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#sagaretry-policy-for-failed-saga-transaction">对于失败的saga事务的重试策略(Retry policy for failed saga transaction)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#sagacompensate-entire-saga-transaction">补偿整个saga事务(Compensate entire saga transaction)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#passing-parameters-to-compensation-steps">传递参数给补偿步骤(Passing parameters to compensation steps)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#expressing-a-saga-in-json-or-yaml">Expressing a saga in JSON or YAML</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../json-yaml-definitions/">JSON/YAML定义</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../persistence/">持久化</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../middleware/">中间件</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../multi-node-clusters/">多节点集群</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../ASPNETCore/">ASP.NET Core</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Elasticsearch/">Elasticsearch插件</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../test-helpers/">测试助手</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Extensions/">扩展</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Samples/">示例</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Workflow Core 中文文档</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>saga事务</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="sagessaga-transaction-with-compensation">带有补偿的sages事务(Saga transaction with compensation)</h1>
+<p>Saga允许您在一个Saga事务中封装一系列步骤，并为每个步骤指定补偿步骤。  </p>
+<p>在这个示例中，<code>Task2</code>将抛出一个异常，然后触发<code>UndoTask2</code>和<code>UndoTask1</code>。  </p>
+<pre><code>builder
+    .StartWith(context =&gt; Console.WriteLine(&quot;Begin&quot;))
+    .Saga(saga =&gt; saga
+        .StartWith&lt;Task1&gt;()
+            .CompensateWith&lt;UndoTask1&gt;()
+        .Then&lt;Task2&gt;()
+            .CompensateWith&lt;UndoTask2&gt;()
+        .Then&lt;Task3&gt;()
+            .CompensateWith&lt;UndoTask3&gt;()
+    )
+        .CompensateWith&lt;CleanUp&gt;()
+    .Then(context =&gt; Console.WriteLine(&quot;End&quot;));
+</code></pre>
+<h2 id="sagaretry-policy-for-failed-saga-transaction">对于失败的saga事务的重试策略(Retry policy for failed saga transaction)</h2>
+<p>这个特定的例子将每5秒重新尝试saga，但您也可能完全失败，并处理整个saga的主补偿任务。  </p>
+<pre><code>builder
+    .StartWith(context =&gt; Console.WriteLine(&quot;Begin&quot;))
+    .Saga(saga =&gt; saga
+        .StartWith&lt;Task1&gt;()
+            .CompensateWith&lt;UndoTask1&gt;()
+        .Then&lt;Task2&gt;()
+            .CompensateWith&lt;UndoTask2&gt;()
+        .Then&lt;Task3&gt;()
+            .CompensateWith&lt;UndoTask3&gt;()
+    )
+    .OnError(Models.WorkflowErrorHandling.Retry, TimeSpan.FromSeconds(5))
+    .Then(context =&gt; Console.WriteLine(&quot;End&quot;));
+</code></pre>
+<h2 id="sagacompensate-entire-saga-transaction">补偿整个saga事务(Compensate entire saga transaction)</h2>
+<p>您也可以只指定一个主补偿步骤，如下所示</p>
+<pre><code>builder
+    .StartWith(context =&gt; Console.WriteLine(&quot;Begin&quot;))
+        .Saga(saga =&gt; saga
+            .StartWith&lt;Task1&gt;()
+            .Then&lt;Task2&gt;()
+            .Then&lt;Task3&gt;()
+    )
+        .CompensateWith&lt;UndoEverything&gt;()
+    .Then(context =&gt; Console.WriteLine(&quot;End&quot;));
+</code></pre>
+<h2 id="passing-parameters-to-compensation-steps">传递参数给补偿步骤(Passing parameters to compensation steps)</h2>
+<p>参数可以传递到补偿步骤，如下所示</p>
+<pre><code>builder
+    .StartWith&lt;SayHello&gt;()
+        .CompensateWith&lt;PrintMessage&gt;(compensate =&gt; 
+        {
+            compensate.Input(step =&gt; step.Message, data =&gt; &quot;undoing...&quot;);
+        })
+</code></pre>
+<h2 id="expressing-a-saga-in-json-or-yaml">Expressing a saga in JSON or YAML</h2>
+<p>通过使用<code>WorkflowCore.Primitives.Sequence</code>步骤并将saga参数设置为true, saga事务可以用JSON或YAML表示。  </p>
+<p>补偿步骤可以通过指定<code>CompensateWith</code>参数来定义。  </p>
+<pre><code>{
+  &quot;Id&quot;: &quot;Saga-Sample&quot;,
+  &quot;Version&quot;: 1,
+  &quot;DataType&quot;: &quot;MyApp.MyDataClass, MyApp&quot;,
+  &quot;Steps&quot;: [
+    {
+      &quot;Id&quot;: &quot;Hello&quot;,
+      &quot;StepType&quot;: &quot;MyApp.HelloWorld, MyApp&quot;,
+      &quot;NextStepId&quot;: &quot;MySaga&quot;
+    },    
+    {
+      &quot;Id&quot;: &quot;MySaga&quot;,
+      &quot;StepType&quot;: &quot;WorkflowCore.Primitives.Sequence, WorkflowCore&quot;,
+      &quot;NextStepId&quot;: &quot;Bye&quot;,
+      &quot;Saga&quot;: true,
+      &quot;Do&quot;: [
+        [
+          {
+            &quot;Id&quot;: &quot;do1&quot;,
+            &quot;StepType&quot;: &quot;MyApp.Task1, MyApp&quot;,
+            &quot;NextStepId&quot;: &quot;do2&quot;,
+            &quot;CompensateWith&quot;: [
+              {
+                &quot;Id&quot;: &quot;undo1&quot;,
+                &quot;StepType&quot;: &quot;MyApp.UndoTask1, MyApp&quot;
+              }
+            ]
+          },
+          {
+            &quot;Id&quot;: &quot;do2&quot;,
+            &quot;StepType&quot;: &quot;MyApp.Task2, MyApp&quot;,
+            &quot;CompensateWith&quot;: [
+              {
+                &quot;Id&quot;: &quot;undo2-1&quot;,
+                &quot;NextStepId&quot;: &quot;undo2-2&quot;,
+                &quot;StepType&quot;: &quot;MyApp.UndoTask2, MyApp&quot;
+              },
+              {
+                &quot;Id&quot;: &quot;undo2-2&quot;,
+                &quot;StepType&quot;: &quot;MyApp.DoSomethingElse, MyApp&quot;
+              }
+            ]
+          }
+        ]
+      ]
+    },    
+    {
+      &quot;Id&quot;: &quot;Bye&quot;,
+      &quot;StepType&quot;: &quot;MyApp.GoodbyeWorld, MyApp&quot;
+    }
+  ]
+}
+</code></pre>
+<pre><code>Id: Saga-Sample
+Version: 1
+DataType: MyApp.MyDataClass, MyApp
+Steps:
+- Id: Hello
+  StepType: MyApp.HelloWorld, MyApp
+  NextStepId: MySaga
+- Id: MySaga
+  StepType: WorkflowCore.Primitives.Sequence, WorkflowCore
+  NextStepId: Bye
+  Saga: true
+  Do:
+  - - Id: do1
+      StepType: MyApp.Task1, MyApp
+      NextStepId: do2
+      CompensateWith:
+      - Id: undo1
+        StepType: MyApp.UndoTask1, MyApp
+    - Id: do2
+      StepType: MyApp.Task2, MyApp
+      CompensateWith:
+      - Id: undo2-1
+        NextStepId: undo2-2
+        StepType: MyApp.UndoTask2, MyApp
+      - Id: undo2-2
+        StepType: MyApp.DoSomethingElse, MyApp
+- Id: Bye
+  StepType: MyApp.GoodbyeWorld, MyApp
+
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../json-yaml-definitions/" class="btn btn-neutral float-right" title="JSON/YAML定义">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../control-structures/" class="btn btn-neutral" title="控制结构"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../control-structures/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../json-yaml-definitions/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

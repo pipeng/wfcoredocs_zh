@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>入门指南 - Workflow Core 中文文档</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u5165\u95e8\u6307\u5357";
+    var mkdocs_page_input_path = "getting-started.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Workflow Core 中文文档</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">简介</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">入门指南</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#steps">步骤(steps)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_2">首先我们定义一些步骤</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#iworkflow">然后通过组成一个步骤链来定义工作流结构。 这是通过实现IWorkflow接口来完成的</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#host">主机(host)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#setup">设置(setup)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#usage">用法(Usage)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">在步骤之间传递数据</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_4">向步骤中注入依赖项</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../external-events/">外部事件</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../activity-workers/">活动工作者</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../error-handling/">错误处理</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../control-structures/">控制结构</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../saga-transactions/">saga事务</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../json-yaml-definitions/">JSON/YAML定义</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../persistence/">持久化</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../middleware/">中间件</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../multi-node-clusters/">多节点集群</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../ASPNETCore/">ASP.NET Core</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Elasticsearch/">Elasticsearch插件</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../test-helpers/">测试助手</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Extensions/">扩展</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Samples/">示例</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Workflow Core 中文文档</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>入门指南</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="_1">基本概念</h1>
+<h2 id="steps">步骤(steps)</h2>
+<p>工作流由一系列相互关联的步骤组成。 每个步骤都可以有输入和输出，这些输入和输出可以被传递回它所在的工作流。  </p>
+<p>步骤是通过创建一个继承自<code>StepBody</code>或<code>StepBodyAsync</code>的抽象类并实现了<code>Run</code>或<code>RunAsync</code>方法来定义的。 它们也可以在定义工作流结构时内联创建。  </p>
+<h3 id="_2">首先我们定义一些步骤</h3>
+<pre><code>public class HelloWorld : StepBody
+{
+    public override ExecutionResult Run(IStepExecutionContext context)
+    {
+        Console.WriteLine(&quot;Hello world&quot;);
+        return ExecutionResult.Next();
+    }
+}
+</code></pre>
+<p>步骤是通过创建一个继承自<code>StepBody</code>或<code>StepBodyAsync</code>抽象类的类并实现<code>Run</code>/<code>RunAsync</code>方法来定义的。 <code>StepBody</code>和<code>StepBodyAsync</code>类实现由工作流宿主首先尝试使用<code>IServiceProvider</code>依赖注入,如果不能用这种方法构建,它会寻找一个无参数的构造函数也可以创建内联定义工作流结构。  </p>
+<h3 id="iworkflow">然后通过组成一个步骤链来定义工作流结构。 这是通过实现IWorkflow接口来完成的</h3>
+<pre><code>public class HelloWorldWorkflow : IWorkflow
+{
+    public string Id =&gt; &quot;HelloWorld&quot;;
+    public int Version =&gt; 1;
+
+    public void Build(IWorkflowBuilder&lt;object&gt; builder)
+    {
+        builder
+            .StartWith&lt;HelloWorld&gt;()
+            .Then&lt;GoodbyeWorld&gt;();
+    }  
+
+}
+</code></pre>
+<p><code>IWorkflow</code>接口还有一个只读<code>Id</code>属性和只读<code>Version</code>属性。 它们被工作流主机用来标识一个工作流定义。  </p>
+<p>这个用JSON实现的工作流看起来是这样的  </p>
+<pre><code>{
+  &quot;Id&quot;: &quot;HelloWorld&quot;,
+  &quot;Version&quot;: 1,
+  &quot;Steps&quot;: [
+    {
+      &quot;Id&quot;: &quot;Hello&quot;,
+      &quot;StepType&quot;: &quot;MyApp.HelloWorld, MyApp&quot;,
+      &quot;NextStepId&quot;: &quot;Bye&quot;
+    },        
+    {
+      &quot;Id&quot;: &quot;Bye&quot;,
+      &quot;StepType&quot;: &quot;MyApp.GoodbyeWorld, MyApp&quot;
+    }
+  ]
+}
+</code></pre>
+<p>您还可以内联定义步骤</p>
+<pre><code>public class HelloWorldWorkflow : IWorkflow
+{
+    public string Id =&gt; &quot;HelloWorld&quot;;
+    public int Version =&gt; 1;
+
+    public void Build(IWorkflowBuilder&lt;object&gt; builder)
+    {
+        builder
+            .StartWith(context =&gt;
+            {
+                Console.WriteLine(&quot;Hello world&quot;);
+                return ExecutionResult.Next();
+            })
+            .Then(context =&gt;
+            {
+                Console.WriteLine(&quot;Goodbye world&quot;);
+                return ExecutionResult.Next();
+            });
+    }
+}
+</code></pre>
+<p>每个运行的工作流都被持久化到每个步骤之间所选择的持久化提供程序，在那里可以在以后的某个时间点拾取它继续执行。 您的步骤的结果可以指示工作流主机将工作流的进一步执行推迟到将来某个时间点或响应外部事件。  </p>
+<h2 id="host">主机(host)</h2>
+<p>工作流主机是负责执行工作流的服务。 它通过轮询持久化提供程序以获取准备运行的工作流实例，执行它们，然后将它们传递回持久化提供程序，以便在下次运行时存储它们。 它还负责将事件发布到可能正在等待事件的任何工作流。  </p>
+<h3 id="setup">设置(setup)</h3>
+<p>使用<code>IServiceCollection</code>的<code>AddWorkflow</code>扩展方法在应用程序启动时配置工作流主机。 默认情况下，它被配置为<code>MemoryPersistenceProvider</code>和<code>SingleNodeConcurrencyProvider</code>用于测试目的。 此时您还可以配置一个DB持久化提供程序。  </p>
+<pre><code>services.AddWorkflow();
+</code></pre>
+<h3 id="usage">用法(Usage)</h3>
+<p>当应用程序启动时，从内置的依赖注入框架<code>IServiceProvider</code>中获取工作流主机。 请确保调用<code>RegisterWorkflow</code>，以便工作流主机知道您的所有工作流，然后调用<code>Start()</code>来启动执行工作流的线程池。 使用<code>StartWorkflow</code>方法来初始化一个特定工作流的新实例。  </p>
+<pre><code>var host = serviceProvider.GetService&lt;IWorkflowHost&gt;();            
+host.RegisterWorkflow&lt;HelloWorldWorkflow&gt;();
+host.Start();
+
+host.StartWorkflow(&quot;HelloWorld&quot;, 1, null);
+
+Console.ReadLine();
+host.Stop();
+</code></pre>
+<h2 id="_3">在步骤之间传递数据</h2>
+<p>每个步骤都是一个黑盒，因此它们支持输入和输出。 这些输入和输出可以映射到定义与每个工作流实例相关的自定义数据的数据类。  </p>
+<p>下面的示例展示了如何在一个步骤上定义输入和输出，然后展示了如何使用内部数据的类型化类定义工作流，以及如何将输入和输出映射到自定义数据类上的属性。  </p>
+<pre><code>//Our workflow step with inputs and outputs
+public class AddNumbers : StepBody
+{
+    public int Input1 { get; set; }
+
+    public int Input2 { get; set; }
+
+    public int Output { get; set; }
+
+    public override ExecutionResult Run(IStepExecutionContext context)
+    {
+        Output = (Input1 + Input2);
+        return ExecutionResult.Next();
+    }
+}
+
+//Our class to define the internal data of our workflow
+public class MyDataClass
+{
+    public int Value1 { get; set; }
+    public int Value2 { get; set; }
+    public int Value3 { get; set; }
+}
+
+//Our workflow definition with strongly typed internal data and mapped inputs &amp; outputs
+public class PassingDataWorkflow : IWorkflow&lt;MyDataClass&gt;
+{  
+    public void Build(IWorkflowBuilder&lt;MyDataClass&gt; builder)
+    {
+        builder            
+            .StartWith&lt;AddNumbers&gt;()
+                .Input(step =&gt; step.Input1, data =&gt; data.Value1)
+                .Input(step =&gt; step.Input2, data =&gt; data.Value2)
+                .Output(data =&gt; data.Value3, step =&gt; step.Output)
+            .Then&lt;CustomMessage&gt;()
+                .Input(step =&gt; step.Message, data =&gt; &quot;The answer is &quot; + data.Value3.ToString());
+    }
+    ...
+}
+</code></pre>
+<p>或者是JSON格式</p>
+<pre><code>{
+  &quot;Id&quot;: &quot;AddWorkflow&quot;,
+  &quot;Version&quot;: 1,
+  &quot;DataType&quot;: &quot;MyApp.MyDataClass, MyApp&quot;,
+  &quot;Steps&quot;: [
+    {
+      &quot;Id&quot;: &quot;Add&quot;,
+      &quot;StepType&quot;: &quot;MyApp.AddNumbers, MyApp&quot;,
+      &quot;NextStepId&quot;: &quot;ShowResult&quot;,
+      &quot;Inputs&quot;: { 
+          &quot;Value1&quot;: &quot;data.Value1&quot;,
+          &quot;Value2&quot;: &quot;data.Value2&quot; 
+       },
+      &quot;Outputs&quot;: { 
+          &quot;Answer&quot;: &quot;step.Output&quot; 
+      }
+    },    
+    {
+      &quot;Id&quot;: &quot;ShowResult&quot;,
+      &quot;StepType&quot;: &quot;MyApp.CustomMessage, MyApp&quot;,
+      &quot;Inputs&quot;: { 
+          &quot;Message&quot;: &quot;\&quot;The answer is \&quot; + data.Value1&quot; 
+       }
+    }
+  ]
+}
+</code></pre>
+<p>或者是YAML格式</p>
+<pre><code>Id: AddWorkflow
+Version: 1
+DataType: MyApp.MyDataClass, MyApp
+Steps:
+
+- Id: Add
+StepType: MyApp.AddNumbers, MyApp
+NextStepId: ShowResult
+Inputs:
+  Value1: data.Value1
+  Value2: data.Value2
+Outputs:
+  Answer: step.Output
+
+- Id: ShowResult
+StepType: MyApp.CustomMessage, MyApp
+Inputs:
+  Message: '&quot;The answer is &quot; + data.Value1'
+</code></pre>
+<h2 id="_4">向步骤中注入依赖项</h2>
+<p>如果向IoC容器注册了步骤类，那么工作流宿主将使用IoC容器来构造它们，从而注入任何所需的依赖项。 这个例子说明了在工作流步骤中使用依赖注入。  </p>
+<p>考虑以下服务  </p>
+<pre><code>public interface IMyService
+{
+    void DoTheThings();
+}
+...
+public class MyService : IMyService
+{
+    public void DoTheThings()
+    {
+        Console.WriteLine(&quot;Doing stuff...&quot;);
+    }
+}
+</code></pre>
+<p>它被如下的工作流步骤所使用  </p>
+<pre><code>public class DoSomething : StepBody
+{
+    private IMyService _myService;
+
+    public DoSomething(IMyService myService)
+    {
+        _myService = myService;
+    }
+
+    public override ExecutionResult Run(IStepExecutionContext context)
+    {
+        _myService.DoTheThings();
+        return ExecutionResult.Next();
+    }
+}
+</code></pre>
+<p>在设置IoC容器时，只需将服务和工作流步骤作为暂态添加到服务集合中。 (避免将步骤注册为单例，因为多个并发工作流可能需要同时使用它们。)  </p>
+<pre><code>IServiceCollection services = new ServiceCollection(); 
+services.AddLogging(); services.AddWorkflow();
+services.AddTransient&lt;DoSomething&gt;(); 
+services.AddTransient&lt;IMyService, MyService&gt;();
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../external-events/" class="btn btn-neutral float-right" title="外部事件">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="简介"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../external-events/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

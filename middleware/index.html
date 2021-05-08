@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>中间件 - Workflow Core 中文文档</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u4e2d\u95f4\u4ef6";
+    var mkdocs_page_input_path = "middleware.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Workflow Core 中文文档</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">简介</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../getting-started/">入门指南</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../external-events/">外部事件</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../activity-workers/">活动工作者</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../error-handling/">错误处理</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../control-structures/">控制结构</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../saga-transactions/">saga事务</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../json-yaml-definitions/">JSON/YAML定义</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../persistence/">持久化</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">中间件</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_2">步骤中间件</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_3">用法</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#prepost">Pre/Post 工作流中间件</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#pre">Pre 工作流中间件</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#pre_1">Pre工作流中间件的异常处理</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#post">Post 工作流中间件</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#post_1">Post工作流中间件的异常处理</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_4">注册中间件</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#_5">更多信息</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../multi-node-clusters/">多节点集群</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../ASPNETCore/">ASP.NET Core</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Elasticsearch/">Elasticsearch插件</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../test-helpers/">测试助手</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Extensions/">扩展</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Samples/">示例</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Workflow Core 中文文档</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>中间件</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="_1">工作流中间件</h1>
+<p>工作流可以通过中间件进行扩展，中间件可以在工作流开始/完成之前/之后运行，也可以围绕工作流步骤运行，以提供实现横切关注点的灵活性，如<a href="https://www.frakkingsweet.com/net-core-log-correlation-easy-access-to-headers/">log correlation</a>， <a href="https://docs.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/implement-http-call-retries-exponential-backoff-polly">retries</a>和其他用例。  </p>
+<p>这可以通过为工作流实现和注册<code>IWorkflowMiddleware</code> 或为步骤注册<code>IWorkflowStepMiddleware</code> 来实现。  </p>
+<h2 id="_2">步骤中间件</h2>
+<p>步骤中间件允许您围绕给定步骤的执行运行额外的代码，并改变其行为。 对于熟悉ASP. net的人来说，实现一个步骤中间件应该很熟悉。 <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/middleware/?view=aspnetcore-3.1">NET Core的中间件管道</a>或<a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-3.1#outgoing-request-middleware"> HttpClient的 DelegatingHandler 中间件</a>。  </p>
+<h3 id="_3">用法</h3>
+<p>首先，创建自己的中间件类来实现 <code>IWorkflowStepMiddleware</code> 。 下面是一个中间件的例子，它将工作流ID和步骤ID添加到应用程序中每个工作流步骤的日志关联上下文中。  </p>
+<p><strong>重要:</strong>你必须确保调用<code>next()</code>作为中间件的一部分。 如果你不这样做，你的脚步永远不会跑。 </p>
+<pre><code class="language-cs">public class LogCorrelationStepMiddleware : IWorkflowStepMiddleware
+{
+    private readonly ILogger&lt;LogCorrelationStepMiddleware&gt; _log;
+
+    public LogCorrelationStepMiddleware(
+        ILogger&lt;LogCorrelationStepMiddleware&gt; log)
+    {
+        _log = log;
+    }
+
+    public async Task&lt;ExecutionResult&gt; HandleAsync(
+        IStepExecutionContext context,
+        IStepBody body,
+        WorkflowStepDelegate next)
+    {
+        var workflowId = context.Workflow.Id;
+        var stepId = context.Step.Id;
+
+        // Uses log scope to add a few attributes to the scope
+        using (_log.BeginScope(&quot;{@WorkflowId}&quot;, workflowId))
+        using (_log.BeginScope(&quot;{@StepId}&quot;, stepId))
+        {
+            // Calling next ensures step gets executed
+            return await next();
+        }
+    }
+}
+</code></pre>
+<p>下面是另一个中间件的例子，它使用<a href="https://github.com/App-vNext/Polly">Polly</a> dotnet弹性库在基于自定义重试策略的工作流步骤上实现重试。  </p>
+<pre><code class="language-cs">public class PollyRetryStepMiddleware : IWorkflowStepMiddleware
+{
+    private const string StepContextKey = &quot;WorkflowStepContext&quot;;
+    private const int MaxRetries = 3;
+    private readonly ILogger&lt;PollyRetryStepMiddleware&gt; _log;
+
+    public PollyRetryMiddleware(ILogger&lt;PollyRetryStepMiddleware&gt; log)
+    {
+        _log = log;
+    }
+
+    // Consult Polly's docs for more information on how to build
+    // retry policies:
+    // https://github.com/App-vNext/Polly
+    public IAsyncPolicy&lt;ExecutionResult&gt; GetRetryPolicy() =&gt;
+        Policy&lt;ExecutionResult&gt;
+            .Handle&lt;TimeoutException&gt;()
+            .RetryAsync(
+                MaxRetries,
+                (result, retryCount, context) =&gt;
+                    UpdateRetryCount(
+                        result.Exception,
+                        retryCount,
+                        context[StepContextKey] as IStepExecutionContext)
+            );
+
+    public async Task&lt;ExecutionResult&gt; HandleAsync(
+        IStepExecutionContext context,
+        IStepBody body,
+        WorkflowStepDelegate next
+    )
+    {
+        return await GetRetryPolicy().ExecuteAsync(
+            ctx =&gt; next(),
+            // The step execution context gets passed down so that
+            // the step is accessible within the retry policy
+            new Dictionary&lt;string, object&gt;
+            {
+                { StepContextKey, context }
+            });
+    }
+
+    private Task UpdateRetryCount(
+        Exception exception,
+        int retryCount,
+        IStepExecutionContext stepContext)
+    {
+        var stepInstance = stepContext.ExecutionPointer;
+        stepInstance.RetryCount = retryCount;
+        return Task.CompletedTask;
+    }
+}
+</code></pre>
+<h2 id="prepost">Pre/Post 工作流中间件</h2>
+<p>工作流中间件要么在工作流启动之前运行，要么在工作流完成之后运行，可以用来挂钩到工作流生命周期，或者在工作流启动之前改变它本身。</p>
+<h3 id="pre">Pre 工作流中间件</h3>
+<p>这些中间件在工作流启动之前运行，并且可以潜在地改变<code>WorkflowInstance</code>上的属性。  </p>
+<p>下面的例子演示了如何使用中间件来解释传递的工作流上的数据，来设置<code>WorkflowInstance</code>上的<code>Description</code>属性。 这在您希望从传递给工作流的数据中派生工作流描述的情况下非常有用。  </p>
+<p>请注意，您使用的是<code>WorkflowMiddlewarePhase.PreWorkflow</code>来指定它在工作流开始之前运行。  </p>
+<p><strong>重要:</strong>你应该调用<code>next</code>作为工作流中间件的一部分，以确保链中的下一个工作流运行。</p>
+<pre><code class="language-cs">// AddDescriptionWorkflowMiddleware.cs
+public class AddDescriptionWorkflowMiddleware : IWorkflowMiddleware
+{
+    public WorkflowMiddlewarePhase Phase =&gt;
+        WorkflowMiddlewarePhase.PreWorkflow;
+
+    public Task HandleAsync(
+        WorkflowInstance workflow,
+        WorkflowDelegate next
+    )
+    {
+        if (workflow.Data is IDescriptiveWorkflowParams descriptiveParams)
+        {
+            workflow.Description = descriptiveParams.Description;
+        }
+
+        return next();
+    }
+}
+
+// IDescriptiveWorkflowParams.cs
+public interface IDescriptiveWorkflowParams
+{
+    string Description { get; }
+}
+
+// MyWorkflowParams.cs
+public MyWorkflowParams : IDescriptiveWorkflowParams
+{
+    public string Description =&gt; $&quot;Run task '{TaskName}'&quot;;
+
+    public string TaskName { get; set; }
+}
+</code></pre>
+<h3 id="pre_1">Pre工作流中间件的异常处理</h3>
+<p>Pre工作流中间件与工作流后中间件的异常处理是不同的。 因为中间件运行在工作流开始之前，任何在预工作流中间件中抛出的异常都会被<code>StartWorkflow</code>方法所触发，而由<code>StartWorkflow</code>的调用者来处理异常并采取相应的行动。  </p>
+<pre><code class="language-cs">public async Task MyMethodThatStartsAWorkflow()
+{
+    try
+    {
+        await host.StartWorkflow(&quot;HelloWorld&quot;, 1, null);
+    }
+    catch(Exception ex)
+    {
+        // Handle the exception appropriately
+    }
+}
+</code></pre>
+<h3 id="post">Post 工作流中间件</h3>
+<p>这些中间件在工作流完成后运行，可以用来为应用程序中的所有工作流执行额外的操作。  </p>
+<p>下面的示例说明了如何使用后工作流中间件将工作流摘要打印到控制台。  </p>
+<p>请注意，您使用的是<code>WorkflowMiddlewarePhase.PostWorkflow</code>来指定它在工作流完成后运行。  </p>
+<p><strong>重要:</strong>你应该调用<code>next</code>作为工作流中间件的一部分，以确保链中的下一个工作流运行。  </p>
+<pre><code class="language-cs">public class PrintWorkflowSummaryMiddleware : IWorkflowMiddleware
+{
+    private readonly ILogger&lt;PrintWorkflowSummaryMiddleware&gt; _log;
+
+    public PrintWorkflowSummaryMiddleware(
+        ILogger&lt;PrintWorkflowSummaryMiddleware&gt; log
+    )
+    {
+        _log = log;
+    }
+
+    public WorkflowMiddlewarePhase Phase =&gt;
+        WorkflowMiddlewarePhase.PostWorkflow;
+
+    public Task HandleAsync(
+        WorkflowInstance workflow,
+        WorkflowDelegate next
+    )
+    {
+        if (!workflow.CompleteTime.HasValue)
+        {
+            return next();
+        }
+
+        var duration = workflow.CompleteTime.Value - workflow.CreateTime;
+        _log.LogInformation($@&quot;Workflow {workflow.Description} completed in {duration:g}&quot;);
+
+        foreach (var step in workflow.ExecutionPointers)
+        {
+            var stepName = step.StepName;
+            var stepDuration = (step.EndTime - step.StartTime) ?? TimeSpan.Zero;
+            _log.LogInformation($&quot;  - Step {stepName} completed in {stepDuration:g}&quot;);
+        }
+
+        return next();
+    }
+}
+</code></pre>
+<h3 id="post_1">Post工作流中间件的异常处理</h3>
+<p>Post工作流中间件与pre工作流中间件的异常处理不同。 在工作流完成时，您的工作流已经运行了，因此很难处理未捕获的异常。  </p>
+<p>默认情况下，如果工作流中间件抛出一个异常，它将被记录下来，并且工作流将正常完成。 但是，这种行为可以改变。  </p>
+<p>要覆盖应用程序中所有工作流的默认后工作流错误处理，只需在依赖注入框架中注册一个新的<code>IWorkflowMiddlewareErrorHandler</code>，其自定义行为如下。  </p>
+<pre><code class="language-cs">// CustomMiddlewareErrorHandler.cs
+public class CustomHandler : IWorkflowMiddlewareErrorHandler
+{
+    public Task HandleAsync(Exception ex)
+    {
+        // Handle your error asynchronously
+    }
+}
+
+// Startup.cs
+public void ConfigureServices(IServiceCollection services)
+{
+    // Other workflow configuration
+    services.AddWorkflow();
+
+    // Should go after .AddWorkflow()
+    services.AddTransient&lt;IWorkflowMiddlewareErrorHandler, CustomHandler&gt;();
+}
+</code></pre>
+<h2 id="_4">注册中间件</h2>
+<p>为了让中间件生效，它们必须使用便利的帮助程序在内置的依赖注入框架中注册。  </p>
+<p><strong>注意:</strong>中间件的运行顺序是:先注册的中间件在链中运行得较早，然后在链中完成得较晚。 对于预/后工作流中间件，所有的预中间件将在工作流开始之前运行，所有的后中间件将在工作流完成之后运行。</p>
+<pre><code class="language-cs">public class Startup
+{
+    public void ConfigureServices(IServiceCollection services)
+    {
+        ...
+
+        // Add workflow middleware
+        services.AddWorkflowMiddleware&lt;AddDescriptionWorkflowMiddleware&gt;();
+        services.AddWorkflowMiddleware&lt;PrintWorkflowSummaryMiddleware&gt;();
+
+        // Add step middleware
+        services.AddWorkflowStepMiddleware&lt;LogCorrelationStepMiddleware&gt;();
+        services.AddWorkflowStepMiddleware&lt;PollyRetryMiddleware&gt;();
+
+        ...
+    }
+}
+</code></pre>
+<h2 id="_5">更多信息</h2>
+<p>请参阅<a href="https://github.com/danielgerlag/workflow-core/tree/master/src/samples/WorkflowCore.Sample19">工作流中间件</a>的示例，以获得工作中的工作流中间件的完整示例。</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../multi-node-clusters/" class="btn btn-neutral float-right" title="多节点集群">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../persistence/" class="btn btn-neutral" title="持久化"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../persistence/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../multi-node-clusters/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

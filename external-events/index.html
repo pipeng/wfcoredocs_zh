@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>外部事件 - Workflow Core 中文文档</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u5916\u90e8\u4e8b\u4ef6";
+    var mkdocs_page_input_path = "external-events.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Workflow Core 中文文档</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">简介</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../getting-started/">入门指南</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">外部事件</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#effective-date">有效日期(Effective Date)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#json-yaml-api">JSON / YAML API</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../activity-workers/">活动工作者</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../error-handling/">错误处理</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../control-structures/">控制结构</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../saga-transactions/">saga事务</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../json-yaml-definitions/">JSON/YAML定义</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../persistence/">持久化</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../middleware/">中间件</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../multi-node-clusters/">多节点集群</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../ASPNETCore/">ASP.NET Core</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Elasticsearch/">Elasticsearch插件</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../test-helpers/">测试助手</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Extensions/">扩展</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Samples/">示例</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Workflow Core 中文文档</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>外部事件</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="_1">事件</h1>
+<p>工作流还可以等待外部事件后再继续。 在下面的例子中，工作流将等待一个键值为0的名为“MyEvent”的事件。 一旦外部源触发了该事件，工作流将被唤醒并继续处理，并将该事件生成的数据传递到下一步。  </p>
+<pre><code class="language-csharp">public class EventSampleWorkflow : IWorkflow&lt;MyDataClass&gt;
+{
+    public void Build(IWorkflowBuilder&lt;MyDataClass&gt; builder)
+    {
+        builder
+            .StartWith(context =&gt; ExecutionResult.Next())
+            .WaitFor(&quot;MyEvent&quot;, data =&gt; &quot;0&quot;)
+                .Output(data =&gt; data.Value, step =&gt; step.EventData)
+            .Then&lt;CustomMessage&gt;()
+                .Input(step =&gt; step.Message, data =&gt; &quot;The data from the event is &quot; + data.Value);
+    }
+}
+...
+//External events are published via the host
+//All workflows that have subscribed to MyEvent 0, will be passed &quot;hello&quot;
+host.PublishEvent(&quot;MyEvent&quot;, &quot;0&quot;, &quot;hello&quot;);
+</code></pre>
+<h2 id="effective-date">有效日期(Effective Date)</h2>
+<p>您还可以在等待事件时指定一个有效日期，这允许您响应过去可能已经发生的事件，或仅响应在有效日期之后发生的事件。  </p>
+<h2 id="json-yaml-api">JSON / YAML API</h2>
+<p><code>.WaitFor</code>可以使用如下输入来实现  </p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CancelCondition</td>
+<td>指定取消条件的可选表达式</td>
+</tr>
+<tr>
+<td>Inputs.EventName</td>
+<td>指定事件名称的表达式</td>
+</tr>
+<tr>
+<td>Inputs.EventKey</td>
+<td>指定事件键值的表达式</td>
+</tr>
+<tr>
+<td>Inputs.EffectiveDate</td>
+<td>指定有效日期的可选表达式</td>
+</tr>
+</tbody>
+</table>
+<pre><code>{
+    &quot;Id&quot;: &quot;MyWaitStep&quot;,
+    &quot;StepType&quot;: &quot;WorkflowCore.Primitives.WaitFor, WorkflowCore&quot;,
+    &quot;NextStepId&quot;: &quot;...&quot;,
+    &quot;CancelCondition&quot;: &quot;...&quot;,
+    &quot;Inputs&quot;: {
+        &quot;EventName&quot;: &quot;\&quot;Event1\&quot;&quot;,
+        &quot;EventKey&quot;: &quot;\&quot;Key1\&quot;&quot;,
+        &quot;EffectiveDate&quot;: &quot;DateTime.Now&quot;
+    }
+}
+</code></pre>
+<pre><code>Id: MyWaitStep
+StepType: WorkflowCore.Primitives.WaitFor, WorkflowCore
+NextStepId: &quot;...&quot;
+CancelCondition: &quot;...&quot;
+Inputs:
+  EventName: '&quot;Event1&quot;'
+  EventKey: '&quot;Key1&quot;'
+  EffectiveDate: DateTime.Now
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../activity-workers/" class="btn btn-neutral float-right" title="活动工作者">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../getting-started/" class="btn btn-neutral" title="入门指南"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../getting-started/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../activity-workers/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

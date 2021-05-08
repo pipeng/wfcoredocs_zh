@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>控制结构 - Workflow Core 中文文档</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u63a7\u5236\u7ed3\u6784";
+    var mkdocs_page_input_path = "control-structures.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Workflow Core 中文文档</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">简介</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../getting-started/">入门指南</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../external-events/">外部事件</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../activity-workers/">活动工作者</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../error-handling/">错误处理</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">控制结构</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#decision-branches">决策分支(Decision Branches)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#fluent-api">Fluent API</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#json-yaml-api">JSON / YAML API</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#foreach">并行ForEach</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#fluent-api_1">Fluent API</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#json-yaml-api_1">JSON / YAML API</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#while">While 循环</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#fluent-api_2">Fluent API</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#json-yaml-api_2">JSON / YAML API</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#if">If 条件</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#fluent-api_3">Fluent API</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#json-yaml-api_3">JSON / YAML API</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#parallel">Parallel路径</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#fluent-api_4">Fluent API</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#json-yaml-api_4">JSON / YAML API</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#schedule">计划(Schedule)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#fluent-api_5">Fluent API</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#json-yaml-api_5">JSON / YAML API</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#delay">延迟(Delay)</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#json-yaml-api_6">JSON / YAML API</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#recur">递归(Recur)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#fluent-api_6">Fluent API</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#json-yaml-api_7">JSON / YAML API</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../saga-transactions/">saga事务</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../json-yaml-definitions/">JSON/YAML定义</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../persistence/">持久化</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../middleware/">中间件</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../multi-node-clusters/">多节点集群</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../ASPNETCore/">ASP.NET Core</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Elasticsearch/">Elasticsearch插件</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../test-helpers/">测试助手</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Extensions/">扩展</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Samples/">示例</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Workflow Core 中文文档</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>控制结构</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="control-structures">控制结构(Control Structures)</h1>
+<h2 id="decision-branches">决策分支(Decision Branches)</h2>
+<p>您可以在工作流中定义多个独立分支，并根据表达式值选择一个。  </p>
+<h3 id="fluent-api">Fluent API</h3>
+<p>对于Fluent API，我们使用工作流构建器上的<code>CreateBranch()</code>方法定义分支。 然后，我们可以使用<code>Branch</code>方法选择一个分支。  </p>
+<p>选择表达式将通过<code>Branch</code>方法与列出的分支匹配，匹配的下一步将被安排在下一步执行。 匹配多个下一步将导致并行分支运行。  </p>
+<p>这个工作流如果<code>data.Value1</code>值是1，将选择<code>branch1</code> ,如果是2则是<code>branch2</code>。  </p>
+<pre><code class="language-csharp">var branch1 = builder.CreateBranch()
+    .StartWith&lt;PrintMessage&gt;()
+        .Input(step =&gt; step.Message, data =&gt; &quot;hi from 1&quot;)
+    .Then&lt;PrintMessage&gt;()
+        .Input(step =&gt; step.Message, data =&gt; &quot;bye from 1&quot;);
+
+var branch2 = builder.CreateBranch()
+    .StartWith&lt;PrintMessage&gt;()
+        .Input(step =&gt; step.Message, data =&gt; &quot;hi from 2&quot;)
+    .Then&lt;PrintMessage&gt;()
+        .Input(step =&gt; step.Message, data =&gt; &quot;bye from 2&quot;);
+
+
+builder
+    .StartWith&lt;HelloWorld&gt;()
+    .Decide(data =&gt; data.Value1)
+        .Branch((data, outcome) =&gt; data.Value1 == &quot;one&quot;, branch1)
+        .Branch((data, outcome) =&gt; data.Value1 == &quot;two&quot;, branch2);
+</code></pre>
+<h3 id="json-yaml-api">JSON / YAML API</h3>
+<p>通过<code>SelectNextStep</code>属性来连接分支，而不是<code>NextStepId</code>。 表达式将与<code>SelectNextStep</code>中列出的步骤id匹配，匹配的下一步将被安排在下一步执行。  </p>
+<pre><code class="language-json">{
+  &quot;Id&quot;: &quot;DecisionWorkflow&quot;,
+  &quot;Version&quot;: 1,
+  &quot;DataType&quot;: &quot;MyApp.MyData, MyApp&quot;,
+  &quot;Steps&quot;: [
+    {
+      &quot;Id&quot;: &quot;decide&quot;,
+      &quot;StepType&quot;: &quot;...&quot;,
+      &quot;SelectNextStep&quot;:
+      {
+        &quot;Branch1&quot;: &quot;&lt;&lt;result expression to match for branch 1&gt;&gt;&quot;,
+        &quot;Branch2&quot;: &quot;&lt;&lt;result expression to match for branch 2&gt;&gt;&quot;
+      }
+    },
+    {
+      &quot;Id&quot;: &quot;Branch1&quot;,
+      &quot;StepType&quot;: &quot;MyApp.PrintMessage, MyApp&quot;,
+      &quot;Inputs&quot;: 
+      { 
+          &quot;Message&quot;: &quot;\&quot;Hello from 1\&quot;&quot; 
+      }
+    },
+    {
+      &quot;Id&quot;: &quot;Branch2&quot;,
+      &quot;StepType&quot;: &quot;MyApp.PrintMessage, MyApp&quot;,
+      &quot;Inputs&quot;: 
+      { 
+        &quot;Message&quot;: &quot;\&quot;Hello from 2\&quot;&quot; 
+      }
+    }
+  ]
+}
+</code></pre>
+<pre><code class="language-yaml">  Id: DecisionWorkflow
+  Version: 1
+  DataType: MyApp.MyData, MyApp
+  Steps:
+
+  - Id: decide
+    StepType: WorkflowCore.Primitives.Decide, WorkflowCore
+    Inputs:
+      Expression: &lt;&lt;input expression to evaluate&gt;&gt;
+    OutcomeSteps:
+      Branch1: '&lt;&lt;result expression to match for branch 1&gt;&gt;'
+      Branch2: '&lt;&lt;result expression to match for branch 2&gt;&gt;'
+  - Id: Branch1
+    StepType: MyApp.PrintMessage, MyApp
+    Inputs:
+      Message: '&quot;Hello from 1&quot;'
+  - Id: Branch2
+    StepType: MyApp.PrintMessage, MyApp
+    Inputs:
+      Message: '&quot;Hello from 2&quot;'
+</code></pre>
+<h2 id="foreach">并行ForEach</h2>
+<h3 id="fluent-api_1">Fluent API</h3>
+<pre><code class="language-csharp">public class ForEachWorkflow : IWorkflow
+{
+    public string Id =&gt; &quot;Foreach&quot;;
+    public int Version =&gt; 1;
+
+    public void Build(IWorkflowBuilder&lt;object&gt; builder)
+    {
+        builder
+            .StartWith&lt;SayHello&gt;()
+            .ForEach(data =&gt; new List&lt;int&gt;() { 1, 2, 3, 4 })
+                .Do(x =&gt; x
+                    .StartWith&lt;DisplayContext&gt;()
+                        .Input(step =&gt; step.Message, (data, context) =&gt; context.Item)
+                    .Then&lt;DoSomething&gt;())
+            .Then&lt;SayGoodbye&gt;();
+    }        
+}
+</code></pre>
+<h3 id="json-yaml-api_1">JSON / YAML API</h3>
+<pre><code class="language-json">{
+  &quot;Id&quot;: &quot;MyForEachStep&quot;,
+  &quot;StepType&quot;: &quot;WorkflowCore.Primitives.ForEach, WorkflowCore&quot;,
+  &quot;NextStepId&quot;: &quot;...&quot;,
+  &quot;Inputs&quot;: { &quot;Collection&quot;: &quot;&lt;&lt;expression to evaluate&gt;&gt;&quot; },
+  &quot;Do&quot;: [[
+      {
+        &quot;Id&quot;: &quot;do1&quot;,
+        &quot;StepType&quot;: &quot;MyApp.DoSomething1, MyApp&quot;,
+        &quot;NextStepId&quot;: &quot;do2&quot;
+      },
+      {
+        &quot;Id&quot;: &quot;do2&quot;,
+        &quot;StepType&quot;: &quot;MyApp.DoSomething2, MyApp&quot;
+      }
+  ]]
+}
+</code></pre>
+<pre><code class="language-yaml">    Id: MyForEachStep
+    StepType: WorkflowCore.Primitives.ForEach, WorkflowCore
+    NextStepId: &quot;...&quot;
+    Inputs:
+      Collection: &quot;&lt;&lt;expression to evaluate&gt;&gt;&quot;
+    Do:
+
+    - - Id: do1
+        StepType: MyApp.DoSomething1, MyApp
+        NextStepId: do2
+      - Id: do2
+        StepType: MyApp.DoSomething2, MyApp
+</code></pre>
+<p>​    </p>
+<h2 id="while">While 循环</h2>
+<p>使用<code>.While</code>方法启动while构造  </p>
+<h3 id="fluent-api_2">Fluent API</h3>
+<pre><code class="language-csharp">public class WhileWorkflow : IWorkflow&lt;MyData&gt;
+{
+    public string Id =&gt; &quot;While&quot;;
+    public int Version =&gt; 1;
+
+    public void Build(IWorkflowBuilder&lt;MyData&gt; builder)
+    {
+        builder
+            .StartWith&lt;SayHello&gt;()
+            .While(data =&gt; data.Counter &lt; 3)
+                .Do(x =&gt; x
+                    .StartWith&lt;DoSomething&gt;()
+                    .Then&lt;IncrementStep&gt;()
+                        .Input(step =&gt; step.Value1, data =&gt; data.Counter)
+                        .Output(data =&gt; data.Counter, step =&gt; step.Value2))
+            .Then&lt;SayGoodbye&gt;();
+    }        
+}
+</code></pre>
+<h3 id="json-yaml-api_2">JSON / YAML API</h3>
+<pre><code class="language-json">{
+  &quot;Id&quot;: &quot;MyWhileStep&quot;,
+  &quot;StepType&quot;: &quot;WorkflowCore.Primitives.While, WorkflowCore&quot;,
+  &quot;NextStepId&quot;: &quot;...&quot;,
+  &quot;Inputs&quot;: { &quot;Condition&quot;: &quot;&lt;&lt;expression to evaluate&gt;&gt;&quot; },
+  &quot;Do&quot;: [[
+      {
+        &quot;Id&quot;: &quot;do1&quot;,
+        &quot;StepType&quot;: &quot;MyApp.DoSomething1, MyApp&quot;,
+        &quot;NextStepId&quot;: &quot;do2&quot;
+      },
+      {
+        &quot;Id&quot;: &quot;do2&quot;,
+        &quot;StepType&quot;: &quot;MyApp.DoSomething2, MyApp&quot;
+      }
+  ]]
+}
+</code></pre>
+<pre><code class="language-yaml">    Id: MyWhileStep
+    StepType: WorkflowCore.Primitives.While, WorkflowCore
+    NextStepId: &quot;...&quot;
+    Inputs:
+      Condition: &quot;&lt;&lt;expression to evaluate&gt;&gt;&quot;
+    Do:
+
+    - - Id: do1
+        StepType: MyApp.DoSomething1, MyApp
+        NextStepId: do2
+      - Id: do2
+        StepType: MyApp.DoSomething2, MyApp
+</code></pre>
+<p>​    </p>
+<h2 id="if">If 条件</h2>
+<p>使用<code>.If</code>方法开始一个If条件</p>
+<h3 id="fluent-api_3">Fluent API</h3>
+<pre><code class="language-csharp">public class IfWorkflow : IWorkflow&lt;MyData&gt;
+{ 
+    public void Build(IWorkflowBuilder&lt;MyData&gt; builder)
+    {
+        builder
+            .StartWith&lt;SayHello&gt;()
+            .If(data =&gt; data.Counter &lt; 3).Do(then =&gt; then
+                .StartWith&lt;PrintMessage&gt;()
+                    .Input(step =&gt; step.Message, data =&gt; &quot;Value is less than 3&quot;)
+            )
+            .If(data =&gt; data.Counter &lt; 5).Do(then =&gt; then
+                .StartWith&lt;PrintMessage&gt;()
+                    .Input(step =&gt; step.Message, data =&gt; &quot;Value is less than 5&quot;)
+            )
+            .Then&lt;SayGoodbye&gt;();
+    }        
+}
+</code></pre>
+<h3 id="json-yaml-api_3">JSON / YAML API</h3>
+<pre><code class="language-json">{
+    &quot;Id&quot;: &quot;MyIfStep&quot;,
+    &quot;StepType&quot;: &quot;WorkflowCore.Primitives.If, WorkflowCore&quot;,
+    &quot;NextStepId&quot;: &quot;...&quot;,
+    &quot;Inputs&quot;: { &quot;Condition&quot;: &quot;&lt;&lt;expression to evaluate&gt;&gt;&quot; },
+    &quot;Do&quot;: [[
+        {
+          &quot;Id&quot;: &quot;do1&quot;,
+          &quot;StepType&quot;: &quot;MyApp.DoSomething1, MyApp&quot;,
+          &quot;NextStepId&quot;: &quot;do2&quot;
+        },
+        {
+          &quot;Id&quot;: &quot;do2&quot;,
+          &quot;StepType&quot;: &quot;MyApp.DoSomething2, MyApp&quot;
+        }
+    ]]
+}
+</code></pre>
+<pre><code class="language-yaml">    Id: MyIfStep
+    StepType: WorkflowCore.Primitives.If, WorkflowCore
+    NextStepId: &quot;...&quot;
+    Inputs:
+      Condition: &quot;&lt;&lt;expression to evaluate&gt;&gt;&quot;
+    Do:
+
+    - - Id: do1
+        StepType: MyApp.DoSomething1, MyApp
+        NextStepId: do2
+      - Id: do2
+        StepType: MyApp.DoSomething2, MyApp
+</code></pre>
+<h2 id="parallel">Parallel路径</h2>
+<p>使用<code>.Parallel()</code>方法来分支并行任务  </p>
+<h3 id="fluent-api_4">Fluent API</h3>
+<pre><code>public class ParallelWorkflow : IWorkflow&lt;MyData&gt;
+{
+    public string Id =&gt; &quot;parallel-sample&quot;;
+    public int Version =&gt; 1;
+
+    public void Build(IWorkflowBuilder&lt;MyData&gt; builder)
+    {
+        builder
+            .StartWith&lt;SayHello&gt;()
+            .Parallel()
+                .Do(then =&gt; 
+                    then.StartWith&lt;Task1dot1&gt;()
+                        .Then&lt;Task1dot2&gt;()
+                .Do(then =&gt;
+                    then.StartWith&lt;Task2dot1&gt;()
+                        .Then&lt;Task2dot2&gt;()
+                .Do(then =&gt;
+                    then.StartWith&lt;Task3dot1&gt;()
+                        .Then&lt;Task3dot2&gt;()
+            .Join()
+            .Then&lt;SayGoodbye&gt;();
+    }        
+
+}
+</code></pre>
+<h3 id="json-yaml-api_4">JSON / YAML API</h3>
+<pre><code>{
+      &quot;Id&quot;: &quot;MyParallelStep&quot;,
+      &quot;StepType&quot;: &quot;WorkflowCore.Primitives.Sequence, WorkflowCore&quot;,
+      &quot;NextStepId&quot;: &quot;...&quot;,
+      &quot;Do&quot;: [
+        [ 
+          {
+            &quot;Id&quot;: &quot;Branch1.Step1&quot;,
+            &quot;StepType&quot;: &quot;MyApp.DoSomething1, MyApp&quot;,
+            &quot;NextStepId&quot;: &quot;Branch1.Step2&quot;
+          },
+          {
+            &quot;Id&quot;: &quot;Branch1.Step2&quot;,
+            &quot;StepType&quot;: &quot;MyApp.DoSomething2, MyApp&quot;
+          }
+        ],          
+        [ 
+          {
+            &quot;Id&quot;: &quot;Branch2.Step1&quot;,
+            &quot;StepType&quot;: &quot;MyApp.DoSomething1, MyApp&quot;,
+            &quot;NextStepId&quot;: &quot;Branch2.Step2&quot;
+          },
+          {
+            &quot;Id&quot;: &quot;Branch2.Step2&quot;,
+            &quot;StepType&quot;: &quot;MyApp.DoSomething2, MyApp&quot;
+          }
+        ]
+      ]
+}
+</code></pre>
+<pre><code>    Id: MyParallelStep
+    StepType: WorkflowCore.Primitives.Sequence, WorkflowCore
+    NextStepId: &quot;...&quot;
+    Do:
+
+    - - Id: Branch1.Step1
+        StepType: MyApp.DoSomething1, MyApp
+        NextStepId: Branch1.Step2
+      - Id: Branch1.Step2
+        StepType: MyApp.DoSomething2, MyApp
+    - - Id: Branch2.Step1
+        StepType: MyApp.DoSomething1, MyApp
+        NextStepId: Branch2.Step2
+      - Id: Branch2.Step2
+        StepType: MyApp.DoSomething2, MyApp
+</code></pre>
+<p>​    </p>
+<h2 id="schedule">计划(Schedule)</h2>
+<p>使用<code>.Schedule</code>来注册未来的一组步骤，以便在您的工作流的后台异步运行。  </p>
+<h3 id="fluent-api_5">Fluent API</h3>
+<pre><code>builder
+    .StartWith(context =&gt; Console.WriteLine(&quot;Hello&quot;))
+    .Schedule(data =&gt; TimeSpan.FromSeconds(5)).Do(schedule =&gt; schedule
+        .StartWith(context =&gt; Console.WriteLine(&quot;Doing scheduled tasks&quot;))
+    )
+    .Then(context =&gt; Console.WriteLine(&quot;Doing normal tasks&quot;));
+</code></pre>
+<h3 id="json-yaml-api_5">JSON / YAML API</h3>
+<pre><code>{
+  &quot;Id&quot;: &quot;MyScheduleStep&quot;,
+  &quot;StepType&quot;: &quot;WorkflowCore.Primitives.Schedule, WorkflowCore&quot;,
+  &quot;Inputs&quot;: { &quot;Interval&quot;: &quot;&lt;&lt;expression to evaluate&gt;&gt;&quot; },
+  &quot;Do&quot;: [[
+      {
+        &quot;Id&quot;: &quot;do1&quot;,
+        &quot;StepType&quot;: &quot;MyApp.DoSomething1, MyApp&quot;,
+        &quot;NextStepId&quot;: &quot;do2&quot;
+      },
+      {
+        &quot;Id&quot;: &quot;do2&quot;,
+        &quot;StepType&quot;: &quot;MyApp.DoSomething2, MyApp&quot;
+      }
+  ]]
+}
+</code></pre>
+<pre><code>    Id: MyScheduleStep
+    StepType: WorkflowCore.Primitives.Schedule, WorkflowCore
+    Inputs:
+      Interval: &quot;&lt;&lt;expression to evaluate&gt;&gt;&quot;
+    Do:
+
+    - - Id: do1
+        StepType: MyApp.DoSomething1, MyApp
+        NextStepId: do2
+      - Id: do2
+        StepType: MyApp.DoSomething2, MyApp
+</code></pre>
+<h3 id="delay">延迟(Delay)</h3>
+<p>Delay步骤将在指定的时间段内暂停工作流的当前分支。  </p>
+<h4 id="json-yaml-api_6">JSON / YAML API</h4>
+<pre><code>{
+  &quot;Id&quot;: &quot;MyDelayStep&quot;,
+  &quot;StepType&quot;: &quot;WorkflowCore.Primitives.Delay, WorkflowCore&quot;,
+  &quot;NextStepId&quot;: &quot;...&quot;,
+  &quot;Inputs&quot;: { &quot;Period&quot;: &quot;&lt;&lt;expression to evaluate&gt;&gt;&quot; }
+}
+</code></pre>
+<pre><code>Id: MyDelayStep
+StepType: WorkflowCore.Primitives.Delay, WorkflowCore
+NextStepId: &quot;...&quot;
+Inputs:
+  Period: &quot;&lt;&lt;expression to evaluate&gt;&gt;&quot;
+</code></pre>
+<h2 id="recur">递归(Recur)</h2>
+<p>使用<code>.Recur</code>在您的工作流中设置一组重复的后台步骤，直到满足某个条件  </p>
+<h3 id="fluent-api_6">Fluent API</h3>
+<pre><code>builder
+    .StartWith(context =&gt; Console.WriteLine(&quot;Hello&quot;))
+    .Recur(data =&gt; TimeSpan.FromSeconds(5), data =&gt; data.Counter &gt; 5).Do(recur =&gt; recur
+        .StartWith(context =&gt; Console.WriteLine(&quot;Doing recurring task&quot;))
+    )
+    .Then(context =&gt; Console.WriteLine(&quot;Carry on&quot;));
+</code></pre>
+<h3 id="json-yaml-api_7">JSON / YAML API</h3>
+<pre><code>{
+  &quot;Id&quot;: &quot;MyScheduleStep&quot;,
+  &quot;StepType&quot;: &quot;WorkflowCore.Primitives.Recur, WorkflowCore&quot;,
+  &quot;Inputs&quot;: { 
+    &quot;Interval&quot;: &quot;&lt;&lt;expression to evaluate&gt;&gt;&quot;,
+    &quot;StopCondition&quot;: &quot;&lt;&lt;expression to evaluate&gt;&gt;&quot; 
+  },
+  &quot;Do&quot;: [[
+      {
+        &quot;Id&quot;: &quot;do1&quot;,
+        &quot;StepType&quot;: &quot;MyApp.DoSomething1, MyApp&quot;,
+        &quot;NextStepId&quot;: &quot;do2&quot;
+      },
+      {
+        &quot;Id&quot;: &quot;do2&quot;,
+        &quot;StepType&quot;: &quot;MyApp.DoSomething2, MyApp&quot;
+      }
+  ]]
+}
+</code></pre>
+<pre><code>    Id: MyScheduleStep
+    StepType: WorkflowCore.Primitives.Recur, WorkflowCore
+    Inputs:
+      Interval: &quot;&lt;&lt;expression to evaluate&gt;&gt;&quot;
+      StopCondition: &quot;&lt;&lt;expression to evaluate&gt;&gt;&quot;
+    Do:
+
+    - - Id: do1
+        StepType: MyApp.DoSomething1, MyApp
+        NextStepId: do2
+      - Id: do2
+        StepType: MyApp.DoSomething2, MyApp
+</code></pre>
+<p>​    </p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../saga-transactions/" class="btn btn-neutral float-right" title="saga事务">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../error-handling/" class="btn btn-neutral" title="错误处理"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../error-handling/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../saga-transactions/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
